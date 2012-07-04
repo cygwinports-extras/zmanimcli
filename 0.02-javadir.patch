@@ -1,0 +1,33 @@
+--- origsrc/zmanimcli	2011-10-21 04:53:09.000000000 -0500
++++ src/zmanimcli	2012-07-04 02:37:37.795584100 -0500
+@@ -19,7 +19,7 @@ fi
+ 
+ 
+ #Try to locate ZmanimCLI.jar
+-ZmanimCLIPATH=`whereis ZmanimCLI.jar | cut -d ' ' -f2`
++ZmanimCLIPATH=/usr/share/java/ZmanimCLI.jar
+ 
+ if [ "$ZmanimCLIPATH" = "" ]
+ then
+@@ -27,6 +27,15 @@ then
+     exit
+ fi
+ 
++#Try to locate zmanim.jar
++ZmanimPATH=/usr/share/java/zmanim.jar
++
++if [ "$ZmanimPATH" = "" ]
++then
++    echo "zmanim.jar not found! Are you sure you have java-zmanim installed?"
++    exit
++fi
++
+ #Make sure sed is installed
+ sed=`which sed`
+ if [ "$sed" = "" ]
+@@ -35,4 +44,4 @@ then
+     exit
+ fi
+ 
+-$java -jar $ZmanimCLIPATH $@ | $sed 's/ZmanimCLI/zmanimcli/g'
++$java -classpath $ZmanimPATH:$ZmanimCLIPATH ZmanimCLI $@ | $sed 's/ZmanimCLI/zmanimcli/g'

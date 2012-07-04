@@ -1,0 +1,25 @@
+JAVA_CLASSPATH="zmanim.jar"
+inherit java
+
+DESCRIPTION="Hebrew calendar with Zmanim"
+HOMEPAGE="http://code.google.com/p/zmanimcli/"
+SRC_URI="http://zmanimcli.googlecode.com/files/${PN}_${PV}.tar.gz"
+SRC_DIR=.
+PATCH_URI="0.02-javadir.patch"
+
+DISTCLEANFILES="*.jar src/*.jar"
+
+src_compile() {
+	lndirs
+	cd ${B}
+	mkdir -p classes
+	cygjavac -d classes -classpath ${CLASSPATH} src/*.java
+	cygjar cf ZmanimCLI.jar -C classes .
+}
+
+src_install() {
+	cd ${B}
+	dobin zmanimcli
+	dojar ZmanimCLI.jar
+	dodoc gpl*.txt
+}

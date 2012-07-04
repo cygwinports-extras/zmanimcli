@@ -1,0 +1,7 @@
+category: Religion
+requires: java java-zmanim sed
+sdesc: "Command-line frontend for the Java zmanim library"
+ldesc: "The ZmanimCLI project consists of a small Java program and bash 
+script that wrap around KosherJava's Zmanim library, letting you get 
+Zmanim from the command line, and thus allowing non-java programs to use 
+the library too."
